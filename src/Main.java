@@ -7,24 +7,10 @@ import app.AppGame;
 
 public final class Main {
 
-	static native long openDisplay() throws LWJGLException;
-	
-	static int getDefaultScreen() throws LWJGLException {
-		return nGetDefaultScreen(openDisplay());
-	}
-	static native int nGetDefaultScreen(long display);
-	private static native DisplayMode[] nGetAvailableDisplayModes(long display, int screen, int extension) throws LWJGLException;
-	
 	public static final void main (String [] arguments) throws LWJGLException {
 		String title = "Sans titre";
 		
-		DisplayMode[] nDisplayModes = nGetAvailableDisplayModes(openDisplay(), getDefaultScreen(), 10);
-		System.err.println("nDisplayModes " + nDisplayModes.length);
-		
         int bpp = 24;
-        if (nDisplayModes.length > 0) {
-            bpp = nDisplayModes[0].getBitsPerPixel();
-        }
         // get the resolutions and frequencys from XRandR
         Screen[] resolutions = XRandR.getResolutions(XRandR.getScreenNames()[0]);
         System.err.println("resolutions " + resolutions.length);
