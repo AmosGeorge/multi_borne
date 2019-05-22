@@ -12,6 +12,7 @@ public final class Main {
 		
         int bpp = 24;
         // get the resolutions and frequencys from XRandR
+        System.err.println("xrandr " + XRandR.getScreenNames().length);
         Screen[] resolutions = XRandR.getResolutions(XRandR.getScreenNames()[0]);
         System.err.println("resolutions " + resolutions.length);
         DisplayMode[] modes = new DisplayMode[resolutions.length];
