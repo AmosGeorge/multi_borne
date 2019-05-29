@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -37,6 +38,9 @@ public class Welcome extends AppPage {
 	private int logoNaturalWidth;
 	private int logoNaturalHeight;
 
+	private Audio music;
+	private boolean musicPlaying;
+
 	public Welcome (int ID) {
 		super (ID);
 	}
@@ -66,6 +70,8 @@ public class Welcome extends AppPage {
 
 		this.setHint ("PRESS [START]");
 		this.setLogo (AppLoader.loadPicture ("/images/logo.png"));
+		this.music = AppLoader.loadAudio ("/musics/paulette.ogg");
+		this.musicPlaying = false;
 	}
 
 	@Override
@@ -103,6 +109,10 @@ public class Welcome extends AppPage {
 			String name = "Joueur " + AppPlayer.COLOR_NAMES [colorID]; // TODO: set user name
 			appGame.appPlayers.add (0, new AppPlayer (colorID, this.gameMasterID, name, AppInput.BUTTON_A | AppInput.BUTTON_PLUS));
 			appGame.enterState (AppGame.PAGES_GAMES, new FadeOutTransition (), new FadeInTransition ());
+		}
+		if (!this.musicPlaying) {
+			this.musicPlaying = true;
+			this.music.playAsMusic (1, 1, true);
 		}
 	}
 
