@@ -3,7 +3,7 @@ build:
 	javac -d bin -cp src:res:lib/* src/Main.java
 
 run:
-	java -cp bin:res:lib/* -Djava.library.path=res/natives Main 2> main.log
+	java -cp bin:res:lib/* -Djava.library.path=res/natives Main > main.log 2>&1
 
 archive:
 	mkdir -p zip
